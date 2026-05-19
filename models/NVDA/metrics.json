@@ -1,8 +1,11 @@
 {
-  "mape": 39.67,
-  "mae_real": 23.45,
-  "rmse_real": 45.67,
-  "r_squared": 0.8675,
-  "directional_accuracy": 0.547,
+  "symbol": "NVDA",
+  "mae_normalized": 0.054577805117463414,
+  "rmse_normalized": 0.0706682351534303,
+  "mape": 44.57267716053111,
+  "mae_real": 32.822003796882115,
+  "rmse_real": 40.948142003371565,
+  "r_squared": 0.8724,
+  "directional_accuracy": 0.5324675324675324,
   "n_test_samples": 155
 }

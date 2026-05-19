@@ -1,8 +1,11 @@
 {
-  "mape": 11.56,
-  "mae_real": 0.45,
-  "rmse_real": 0.67,
-  "r_squared": 0.1083,
-  "directional_accuracy": 0.50,
-  "n_test_samples": 155
+  "symbol": "NU",
+  "mae_normalized": 0.08466343342483384,
+  "rmse_normalized": 0.09778414717197427,
+  "mape": 13.484163211522121,
+  "mae_real": 1.1243792167434494,
+  "rmse_real": 1.3614059797652345,
+  "r_squared": 0.1083177432184751,
+  "directional_accuracy": 0.5123456790123457,
+  "n_test_samples": 81
 }

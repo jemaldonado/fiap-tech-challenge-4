@@ -1,8 +1,11 @@
 {
-  "mape": 10.15,
-  "mae_real": 15.23,
-  "rmse_real": 22.89,
-  "r_squared": 0.6577,
-  "directional_accuracy": 0.50,
+  "symbol": "MELI",
+  "mae_normalized": 0.020952347173401154,
+  "rmse_normalized": 0.027883028868906906,
+  "mape": 9.937872001095844,
+  "mae_real": 114.07353542554142,
+  "rmse_real": 142.22216525276554,
+  "r_squared": 0.8359,
+  "directional_accuracy": 0.46818181818181815,
   "n_test_samples": 155
 }
