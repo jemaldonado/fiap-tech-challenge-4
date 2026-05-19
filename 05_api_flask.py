@@ -7,8 +7,7 @@ Busca dados automaticamente do Yahoo Finance, normaliza e retorna em USD.
 import numpy as np
 import pandas as pd
 import yfinance as yf
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask import Flask, request, jsonify, make_response
 from tensorflow.keras.models import load_model
 import json
 import pickle
@@ -17,7 +16,17 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"]}})
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, Accept'
+    response.headers['Access-Control-Max-Age'] = '3600'
+    return response
+
+@app.route('/*', methods=['OPTIONS'])
+def handle_preflight():
+    return '', 204
 
 SYMBOLS = ['NVDA', 'MELI', 'NU']
 WINDOW_SIZE = 120
