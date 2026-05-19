@@ -16,9 +16,11 @@ COPY swagger.yaml .
 COPY data/ ./data/
 COPY models/ ./models/
 
-# Render usa porta configurável, padrão 8000
-EXPOSE 8000
+# Render usa PORT como variável de ambiente, padrão 10000
+EXPOSE 10000
 
-# Gunicorn é mais estável que Flask dev server para produção
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "--worker-class", "sync", "--timeout", "120", "05_api_flask:app"]
+# Rodar com Gunicorn (melhor para produção)
+# Render injeta PORT como variável de ambiente
+ENV PORT=10000
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--workers", "1", "--worker-class", "sync", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "05_api_flask:app"]
 
