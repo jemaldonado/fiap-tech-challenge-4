@@ -296,7 +296,9 @@ def swagger_ui():
 def swagger_spec():
     """Retorna especificação Swagger em JSON"""
     import yaml
-    with open('swagger.yaml', 'r', encoding='utf-8') as f:
+    import os
+    swagger_path = os.path.join(os.path.dirname(__file__), 'swagger.yaml')
+    with open(swagger_path, 'r', encoding='utf-8') as f:
         spec = yaml.safe_load(f)
     response = jsonify(spec)
     response.headers['Content-Type'] = 'application/json; charset=utf-8'
