@@ -16,7 +16,15 @@ import os
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-CORS(app)
+
+cors_config = {
+    "origins": ["*"],
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization", "Accept"],
+    "supports_credentials": True,
+    "max_age": 3600
+}
+CORS(app, resources={r"/*": cors_config})
 
 SYMBOLS = ['NVDA', 'MELI', 'NU']
 WINDOW_SIZE = 120
