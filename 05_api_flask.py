@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from tensorflow.keras.models import load_model
 import json
 import pickle
@@ -15,6 +16,7 @@ import os
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
+CORS(app)
 
 SYMBOLS = ['NVDA', 'MELI', 'NU']
 WINDOW_SIZE = 120
