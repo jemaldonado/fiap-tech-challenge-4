@@ -1,0 +1,11 @@
+{
+  "symbol": "NVDA",
+  "window_size": 120,
+  "learning_rate": 0.001,
+  "dropout": 0.2,
+  "batch_size": 32,
+  "epochs_treinado": 29,
+  "final_loss": 0.00012768043961841613,
+  "final_val_loss": 0.0018799550598487258,
+  "nota": "Modelo retreinado com melhores hiperparametros da otimizacao"
+}

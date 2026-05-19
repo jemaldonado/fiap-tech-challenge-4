@@ -1,0 +1,11 @@
+{
+  "symbol": "NVDA",
+  "mae_normalized": 1.7995283806174052,
+  "rmse_normalized": 5.297379658168614,
+  "mape": 355.1323269923684,
+  "mae_real": 235.0612772295552,
+  "rmse_real": 691.9639725794976,
+  "r_squared": -716.1697248211526,
+  "directional_accuracy": 0.5909090909090909,
+  "n_test_samples": 155
+}

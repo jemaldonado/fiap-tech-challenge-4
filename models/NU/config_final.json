@@ -1,0 +1,11 @@
+{
+  "symbol": "NU",
+  "window_size": 120,
+  "learning_rate": 0.0005,
+  "dropout": 0.1,
+  "batch_size": 32,
+  "epochs_treinado": 38,
+  "final_loss": 0.0013011705595999956,
+  "final_val_loss": 0.0015704308170825243,
+  "nota": "Modelo retreinado com melhores hiperparametros da otimizacao"
+}

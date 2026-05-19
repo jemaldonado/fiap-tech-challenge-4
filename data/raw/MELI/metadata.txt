@@ -1,0 +1,7 @@
+symbol: MELI
+n_records: 1144
+start_date: 2020-01-02
+end_date: 2024-07-19
+min_price: 447.3399963378906
+max_price: 1984.3399658203125
+last_price: 1649.989990234375

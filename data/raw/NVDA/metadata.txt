@@ -1,0 +1,7 @@
+symbol: NVDA
+n_records: 1144
+start_date: 2020-01-02
+end_date: 2024-07-19
+min_price: 4.890824317932129
+max_price: 135.5146484375
+last_price: 117.8731689453125

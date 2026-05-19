@@ -1,0 +1,11 @@
+{
+  "symbol": "NU",
+  "mae_normalized": 7.84461274085404,
+  "rmse_normalized": 12.6636874111094,
+  "mape": 944.5692430585359,
+  "mae_real": 80.56417208542058,
+  "rmse_real": 130.05606696890064,
+  "r_squared": -32331.432500841947,
+  "directional_accuracy": 0.5,
+  "n_test_samples": 81
+}

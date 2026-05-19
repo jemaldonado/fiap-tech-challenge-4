@@ -1,0 +1,7 @@
+symbol: NU
+n_records: 655
+start_date: 2021-12-09
+end_date: 2024-07-19
+min_price: 3.309999942779541
+max_price: 13.579999923706055
+last_price: 13.470000267028809
