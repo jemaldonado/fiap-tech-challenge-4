@@ -308,7 +308,16 @@ def swagger_ui():
 def swagger_spec():
     """Retorna especificação Swagger em JSON"""
     host = request.host
-    scheme = request.scheme if request.scheme else 'https'
+
+    scheme = 'https'
+    if request.headers.get('X-Forwarded-Proto'):
+        scheme = request.headers.get('X-Forwarded-Proto')
+    elif request.scheme:
+        scheme = request.scheme
+
+    if 'localhost' in host or '127.0.0.1' in host:
+        scheme = 'http'
+
     spec = {
         'swagger': '2.0',
         'info': {
