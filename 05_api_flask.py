@@ -160,8 +160,7 @@ def index():
             'modelos_disponiveis': 'GET /modelos',
             'metricas_modelo': 'GET /modelos/<symbol>',
             'prever_ticker': 'GET /prever/<symbol>',
-            'prever_todos': 'GET /prever/todos',
-            'documentacao_interativa': 'GET /apidocs'
+            'prever_todos': 'GET /prever/todos'
         },
         'tickers_disponiveis': SYMBOLS,
         'exemplo_uso': 'GET /prever/NVDA retorna previsão em USD para amanhã'
@@ -255,54 +254,9 @@ def prever_todos():
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
-@app.route('/apidocs', methods=['GET'])
-def swagger_ui():
-    """Retorna Swagger UI (documentação interativa)"""
-    html = """
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>API LSTM - Documentação Interativa</title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3/swagger-ui.css">
-        <style>
-          html { box-sizing: border-box; overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
-          *, *:before, *:after { box-sizing: inherit; }
-          body { margin:0; padding:0; }
-        </style>
-      </head>
-      <body>
-        <div id="swagger-ui"></div>
-        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
-        <script>
-          const ui = SwaggerUIBundle({
-            url: "/swagger.json",
-            dom_id: '#swagger-ui',
-            presets: [
-              SwaggerUIBundle.presets.apis,
-              SwaggerUIBundle.SwaggerUIStandalonePreset
-            ],
-            layout: "BaseLayout"
-          })
-          window.ui = ui
-        </script>
-      </body>
-    </html>
-    """
-    return html, 200, {'Content-Type': 'text/html'}
-
-@app.route('/swagger.json', methods=['GET'])
-def swagger_spec():
-    """Retorna especificação Swagger em JSON"""
-    import yaml
-    import os
-    swagger_path = os.path.join(os.path.dirname(__file__), 'swagger.yaml')
-    with open(swagger_path, 'r', encoding='utf-8') as f:
-        spec = yaml.safe_load(f)
-    response = jsonify(spec)
-    response.headers['Content-Type'] = 'application/json; charset=utf-8'
-    return response
+# Rotas /apidocs e /swagger.json removidas
+# Documentação completa disponível em: README.md do repositório GitHub
+# https://github.com/jemaldonado/fiap-tech-challenge-4
 
 # ===== INICIAR =====
 if __name__ == '__main__':
