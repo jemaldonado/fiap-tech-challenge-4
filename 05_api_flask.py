@@ -297,6 +297,8 @@ def swagger_ui():
 @app.route('/swagger.json', methods=['GET'])
 def swagger_spec():
     """Retorna especificação Swagger em JSON"""
+    host = request.host
+    scheme = request.scheme if request.scheme else 'https'
     spec = {
         'swagger': '2.0',
         'info': {
@@ -305,9 +307,9 @@ def swagger_spec():
             'version': '2.0',
             'contact': {'name': 'FIAP Tech Challenge'}
         },
-        'host': 'localhost:5000',
+        'host': host,
         'basePath': '/',
-        'schemes': ['http', 'https'],
+        'schemes': [scheme],
         'consumes': ['application/json'],
         'produces': ['application/json'],
         'paths': {
