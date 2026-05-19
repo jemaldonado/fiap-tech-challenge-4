@@ -295,15 +295,98 @@ def swagger_ui():
 @app.route('/swagger.json', methods=['GET'])
 def swagger_spec():
     """Retorna especificação Swagger em JSON"""
-    import yaml
-    try:
-        with open('swagger.yaml', 'r', encoding='utf-8') as f:
-            spec = yaml.safe_load(f)
-        response = jsonify(spec)
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
-        return response
-    except Exception as e:
-        return jsonify({'erro': f'Erro ao carregar swagger.yaml: {str(e)}'}), 500
+    spec = {
+        'swagger': '2.0',
+        'info': {
+            'title': 'API LSTM - Previsão de Preços de Ações',
+            'description': 'API simples para prever preços de ações com modelos LSTM',
+            'version': '2.0',
+            'contact': {'name': 'FIAP Tech Challenge'}
+        },
+        'host': 'localhost:5000',
+        'basePath': '/',
+        'schemes': ['http', 'https'],
+        'consumes': ['application/json'],
+        'produces': ['application/json'],
+        'paths': {
+            '/': {
+                'get': {
+                    'summary': 'Informações gerais da API',
+                    'description': 'Retorna lista de endpoints disponíveis',
+                    'tags': ['Geral'],
+                    'responses': {'200': {'description': 'Info da API'}}
+                }
+            },
+            '/health': {
+                'get': {
+                    'summary': 'Health check',
+                    'description': 'Verificar se API está operacional',
+                    'tags': ['Status'],
+                    'responses': {'200': {'description': 'API operacional'}}
+                }
+            },
+            '/modelos': {
+                'get': {
+                    'summary': 'Listar todos os modelos',
+                    'description': 'Retorna modelos com métricas',
+                    'tags': ['Modelos'],
+                    'responses': {'200': {'description': 'Lista de modelos'}}
+                }
+            },
+            '/modelos/{symbol}': {
+                'get': {
+                    'summary': 'Detalhes de um modelo',
+                    'description': 'Métricas completas de um ticker',
+                    'tags': ['Modelos'],
+                    'parameters': [
+                        {
+                            'name': 'symbol',
+                            'in': 'path',
+                            'required': True,
+                            'type': 'string',
+                            'description': 'NVDA, MELI ou NU'
+                        }
+                    ],
+                    'responses': {
+                        '200': {'description': 'Detalhes do modelo'},
+                        '404': {'description': 'Modelo não encontrado'}
+                    }
+                }
+            },
+            '/prever/{symbol}': {
+                'get': {
+                    'summary': 'Prever preço para amanhã',
+                    'description': 'Previsão de preço com sinal de trading',
+                    'tags': ['Previsões'],
+                    'parameters': [
+                        {
+                            'name': 'symbol',
+                            'in': 'path',
+                            'required': True,
+                            'type': 'string',
+                            'description': 'NVDA, MELI ou NU'
+                        }
+                    ],
+                    'responses': {
+                        '200': {'description': 'Previsão com métricas'},
+                        '404': {'description': 'Modelo não encontrado'},
+                        '500': {'description': 'Erro ao processar'}
+                    }
+                }
+            },
+            '/prever/todos': {
+                'get': {
+                    'summary': 'Prever para todos os tickers',
+                    'description': 'Previsões para NVDA, MELI e NU',
+                    'tags': ['Previsões'],
+                    'responses': {'200': {'description': 'Previsões para todos'}}
+                }
+            }
+        }
+    }
+    response = jsonify(spec)
+    response.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return response
 # https://github.com/jemaldonado/fiap-tech-challenge-4
 
 # ===== INICIAR =====
