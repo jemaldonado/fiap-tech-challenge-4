@@ -6,8 +6,9 @@ global:
 
 scrape_configs:
   - job_name: 'api-lstm'
+    scheme: https
     static_configs:
-      - targets: ['api-lstm:5000']
+      - targets: ['api-lstm.onrender.com']
     metrics_path: '/metrics'
     scrape_interval: 15s
     scrape_timeout: 10s
