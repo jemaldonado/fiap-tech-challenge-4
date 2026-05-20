@@ -5,7 +5,7 @@ API REST para previsão de preços de ações em tempo real usando redes neurais
 ## Função
 
 O usuário quer prever o valor de uma ação em um dia posterior.
-Esolhe o Ativo, a api seleciona modelo referente ao aitvo, busca os ultimos 160 dias e faz um predição.
+Esolhe o Ativo, a api seleciona modelo referente ao aitvo, busca os ultimos 120 dias e faz um predição.
 por limitações de hardware do render, tive que reduzir para 120 dias.
 
 ## Visão Geral
