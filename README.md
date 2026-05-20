@@ -20,7 +20,6 @@ API REST para previsão de preços de ações em tempo real usando redes neurais
 
 2. Pré-processamento
    └─> Normalização MinMax Scaler
-   └─> Janelas deslizantes (120 dias)
 
 3. Treinamento LSTM
    └─> LSTM(64) + Dropout(0.2)
