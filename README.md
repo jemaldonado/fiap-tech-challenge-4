@@ -1,6 +1,13 @@
 # LSTM Stock Price Predictor API
 
 API REST para previsão de preços de ações em tempo real usando redes neurais LSTM (Long Short-Term Memory). O sistema foi otimizado com Grid Search.
+
+## Função
+
+O usuário quer prever o valor de uma ação em um dia posterior.
+Esolhe o Ativo, a api seleciona modelo referente ao aitvo, busca os ultimos 160 dias e faz um predição.
+por limitações de hardware do render, tive que reduzir para 120 dias.
+
 ## Visão Geral
 
 - **Tecnologia**: Deep Learning (LSTM) com TensorFlow/Keras
