@@ -8,7 +8,7 @@ scrape_configs:
   - job_name: 'api-lstm'
     scheme: https
     static_configs:
-      - targets: ['api-lstm.onrender.com']
+      - targets: ['fiap-tech-challenge-4.onrender.com']
     metrics_path: '/metrics'
     scrape_interval: 15s
     scrape_timeout: 10s
