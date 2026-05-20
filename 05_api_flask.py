@@ -12,9 +12,31 @@ from tensorflow.keras.models import load_model
 import json
 import pickle
 import os
+import time
 from datetime import datetime, timedelta
+from prometheus_client import Counter, Histogram, generate_latest
 
 app = Flask(__name__)
+
+request_count = Counter(
+    'api_requests_total',
+    'Total HTTP requests',
+    ['method', 'endpoint', 'status']
+)
+request_latency = Histogram(
+    'api_request_duration_seconds',
+    'HTTP request latency in seconds',
+    ['endpoint']
+)
+prediction_counter = Counter(
+    'predictions_total',
+    'Total predictions made',
+    ['ticker', 'signal']
+)
+
+@app.before_request
+def before_request():
+    request.start_time = time.time()
 
 @app.after_request
 def add_cors_headers(response):
@@ -22,6 +44,17 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, Accept'
     response.headers['Access-Control-Max-Age'] = '3600'
+
+    if hasattr(request, 'start_time'):
+        latency = time.time() - request.start_time
+        request_latency.labels(endpoint=request.endpoint or 'unknown').observe(latency)
+
+    request_count.labels(
+        method=request.method,
+        endpoint=request.endpoint or 'unknown',
+        status=response.status_code
+    ).inc()
+
     return response
 
 @app.route('/*', methods=['OPTIONS'])
@@ -121,6 +154,8 @@ def prever_amanha(symbol):
     else:
         sinal = "NEUTRO"
 
+    prediction_counter.labels(ticker=symbol, signal=sinal).inc()
+
     # Datas para documento
     if isinstance(datas[-1], str):
         data_ultima = datas[-1][:10]  # Pega apenas YYYY-MM-DD se for string
@@ -159,6 +194,11 @@ print(f"[OK] {n_modelos}/{len(SYMBOLS)} modelo(s) carregado(s)")
 print(f"{'='*60}\n")
 
 # ===== ROTAS =====
+
+@app.route('/metrics', methods=['GET'])
+def metrics():
+    """Prometheus metrics endpoint"""
+    return generate_latest(), 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 @app.route('/')
 def index():

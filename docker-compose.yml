@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  api-lstm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-lstm
+    ports:
+      - "5000:10000"
+    environment:
+      - PORT=10000
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+
+  prometheus:
+    build:
+      context: .
+      dockerfile: Dockerfile.prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+    depends_on:
+      - api-lstm
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+volumes:
+  prometheus_data:
